@@ -30,7 +30,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link${activePage eq 'Cars' ? ' active' : ''}"
+                           href="${pageContext.request.contextPath}/Cars">
+                            Cars
+                        </a>
                     </li>
 
                     <li class="nav-item">
