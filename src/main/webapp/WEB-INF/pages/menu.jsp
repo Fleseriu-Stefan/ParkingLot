@@ -37,6 +37,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link${activePage eq 'Users' ? ' active' : ''}"
+                           href="${pageContext.request.contextPath}/Users">
+                            Users
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link disabled"
                            aria-disabled="true">Disabled</a>
                     </li>
