@@ -29,7 +29,7 @@ public class User {
     @Column(name = "password", length = 255)
     private String password;
 
-    @OneToMany(mappedBy = "owner", orphanRemoval = true)
+    @OneToMany(mappedBy = "owner")
     private List<Car> cars = new ArrayList<>();
 
     public Long getId() {

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "Cars", value = "/Cars")
@@ -35,6 +36,25 @@ public class Cars extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
+        String[] selectedIds = request.getParameterValues("car_ids");
+        List<Long> carIds = new ArrayList<>();
+        if (selectedIds != null) {
+            for (String selectedId : selectedIds) {
+                try {
+                    long id = Long.parseLong(selectedId);
+                    if (id <= 0) {
+                        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid car ID");
+                        return;
+                    }
+                    carIds.add(id);
+                } catch (NumberFormatException ex) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid car ID");
+                    return;
+                }
+            }
+        }
 
+        carsBean.deleteCarsByIds(carIds);
+        response.sendRedirect(request.getContextPath() + "/Cars");
     }
 }
